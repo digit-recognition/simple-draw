@@ -1,4 +1,8 @@
-import { Component, HostListener, ElementRef, ViewChild, AfterViewInit, Directive, Input } from '@angular/core';
+import { Component, HostListener, ElementRef, ViewChild, AfterViewInit, Directive, Input, Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { catchError, retry } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs'
+import { RecognitionService } from './recognition.service';
 
 @Component({
   selector: 'app-root',
@@ -7,6 +11,8 @@ import { Component, HostListener, ElementRef, ViewChild, AfterViewInit, Directiv
 })
 export class AppComponent implements AfterViewInit {
   title = 'hellow-world';
+
+  constructor(private recognitionService: RecognitionService) { }
 
   private lastX:number;
   private lastY:number;
@@ -55,7 +61,10 @@ export class AppComponent implements AfterViewInit {
   }
 
   public recognize() {
+    var imgBytes = this.ctx.getImageData(0, 0, this.width, this.height);
+    console.log(imgBytes.data);
 
+    this.recognitionService.recognize(imgBytes.data);
   }
 
   private draw(lX, lY, cX, cY) {
@@ -67,7 +76,7 @@ export class AppComponent implements AfterViewInit {
 
     //this.ctx.shadowBlur = 15;
     //this.ctx.shadowColor = ""
-    
+
     //this.ctx.strokeStyle = "#4bf";
     this.ctx.stroke();
   }
