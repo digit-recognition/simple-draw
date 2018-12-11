@@ -61,10 +61,8 @@ export class AppComponent implements AfterViewInit {
   }
 
   public recognize() {
-    var imgBytes = this.ctx.getImageData(0, 0, this.width, this.height);
-    console.log(imgBytes.data);
-
-    this.recognitionService.recognize(imgBytes.data);
+    var imgBytes = this.myCanvas.nativeElement.toDataURL("image/png");
+    this.recognitionService.recognize(imgBytes);
   }
 
   private draw(lX, lY, cX, cY) {

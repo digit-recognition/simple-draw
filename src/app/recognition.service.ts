@@ -13,9 +13,7 @@ export class RecognitionService {
   recognize(imgBytes: Object) {
     const httpOptions = {
       headers: new HttpHeaders({
-        "Access-Control-Allow-Credentials" : "true",
-        "Access-Control-Allow-Origin" : '*',
-        "myheader": "myval"
+        "Content-Type": "application/upload"
       })
     };
 
