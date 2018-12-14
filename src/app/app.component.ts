@@ -10,7 +10,8 @@ import { RecognitionService } from './recognition.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements AfterViewInit {
-  title = 'hellow-world';
+  title = 'Digit recognizer';
+  result = '?'
 
   constructor(private recognitionService: RecognitionService) { }
 
@@ -20,6 +21,7 @@ export class AppComponent implements AfterViewInit {
   private drawing:boolean = false;
   private ctx:CanvasRenderingContext2D;
 
+  @ViewChild("recognized") public recognizedDigit: ElementRef;
   @ViewChild("canvas") public myCanvas: ElementRef;
   @Input() public width = 280;
   @Input() public height = 280;
@@ -61,8 +63,9 @@ export class AppComponent implements AfterViewInit {
   }
 
   public recognize() {
+    this.result = '.....'
     var imgBytes = this.myCanvas.nativeElement.toDataURL("image/png");
-    this.recognitionService.recognize(imgBytes);
+    this.recognitionService.recognize(imgBytes, (value) => { this.result = value});
   }
 
   private draw(lX, lY, cX, cY) {
@@ -72,10 +75,7 @@ export class AppComponent implements AfterViewInit {
     this.ctx.lineWidth = 10;
     this.ctx.lineCap = "round";
 
-    //this.ctx.shadowBlur = 15;
-    //this.ctx.shadowColor = ""
-
-    //this.ctx.strokeStyle = "#4bf";
+    this.ctx.strokeStyle = "#4bf";
     this.ctx.stroke();
   }
 }

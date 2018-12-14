@@ -10,21 +10,25 @@ import { Observable, throwError } from 'rxjs';
 export class RecognitionService {
   constructor(private http: HttpClient) { }
 
-  recognize(imgBytes: Object) {
+  recognize(imgBytes: Object, changeCallback) {
     const httpOptions = {
       headers: new HttpHeaders({
         "Content-Type": "application/upload"
       })
     };
 
+    //TODO: mast be replaced
     this.http.post('http://localhost:8080/digit-gateway/recognize', imgBytes, httpOptions).subscribe(value =>{
         console.log('value:', value);
+
+        changeCallback(value);
+        // recognizedDigit.nativeElement.value = value;
     },
     error => {
         console.log('error', error);
+        changeCallback(error);
+        // recognizedDigit.nativeElement.value = value;
     });
-
-    console.log('scope is ');
 }
 
 private handleError(error: HttpErrorResponse) {
