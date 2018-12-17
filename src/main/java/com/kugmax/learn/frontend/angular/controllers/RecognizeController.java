@@ -1,6 +1,8 @@
 package com.kugmax.learn.frontend.angular.controllers;
 
+import com.kugmax.learn.frontend.angular.clients.GatewayAPIClient;
 import org.apache.tomcat.util.codec.binary.Base64;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,13 +17,15 @@ import java.io.InputStream;
 @RestController
 public class RecognizeController {
 
-    @RequestMapping(method = RequestMethod.POST)
+    @Autowired
+    private GatewayAPIClient client;
 
+    @RequestMapping(method = RequestMethod.POST)
     public String recognize(HttpEntity<byte[]> requestEntity) throws Exception {
 
         System.out.println("in recognize");
         String imageString = IOUtils.toString(requestEntity.getBody(), "UTF-8");
 
-        return "need impl";
+        return String.valueOf(client.saveAndRecognize(imageString));
     }
 }
