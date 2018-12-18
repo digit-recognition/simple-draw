@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.kugmax.learn.digitrecognition.frontend.angular</groupId>
-	<artifactId>digit-recognition-frontend-angular</artifactId>
+	<artifactId>dr-frontend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>digit-recognition-frontend-angular</name>
 	<description>Demo project for Spring Boot</description>
