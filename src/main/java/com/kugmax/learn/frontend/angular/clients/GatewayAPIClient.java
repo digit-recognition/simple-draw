@@ -13,8 +13,9 @@ public class GatewayAPIClient {
     public int saveAndRecognize(String img) {
 
 //      TODO: need descovery
+//      "localhost", 6565
 
-       ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 6565)
+       ManagedChannel channel = ManagedChannelBuilder.forTarget("dr-gateway")
          .usePlaintext()
          .build();
 
