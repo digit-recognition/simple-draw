@@ -16,6 +16,8 @@ public class GatewayAPIClient {
 //      "localhost", 6565
 
        ManagedChannel channel = ManagedChannelBuilder.forTarget("dr-gateway")
+//       ManagedChannel channel = ManagedChannelBuilder.forAddress("dr-gateway", 6565)
+//       ManagedChannel channel = ManagedChannelBuilder.forAddress("10.99.21.218", 6565)
          .usePlaintext()
          .build();
 

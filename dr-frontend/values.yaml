@@ -6,7 +6,7 @@ replicaCount: 1
 
 image:
   repository: kugmax/dr-frontend
-  tag: 1
+  tag: 5
   pullPolicy: IfNotPresent
 
 nameOverride: ""
